@@ -82,11 +82,11 @@ function start() {
                 <input class="hidden-requirement" type="hidden" name="${requirement.name}">
                 <div class="form_toggle-item item-1">
                     <input name="radio-${i}" id="form-radio-1-${i}" type="radio" value="off" checked> 
-                    <label for="form-radio-1-${i}">OFF</label>
+                    <label for="form-radio-1-${i}">Не нужно</label>
                 </div>
                 <div class="form_toggle-item item-2">
                     <input name="radio-${i}" id="form-radio-2-${i}" type="radio" value="on">
-                    <label for="form-radio-2-${i}">ON</label>
+                    <label for="form-radio-2-${i}">Нужно</label>
                 </div>
             </div>
         `
