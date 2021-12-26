@@ -2,8 +2,6 @@ from typing import Dict, Iterable, List, Union
 from owlready2 import onto_path, get_ontology
 from os import getcwd
 
-import create_ontology
-
 
 CURRENT_DIRECTORY = getcwd()
 onto_path.append(CURRENT_DIRECTORY)
@@ -12,7 +10,7 @@ onto_path.append(CURRENT_DIRECTORY)
 DBMSDictType = Dict[str, Union[str, List[str], int]]
 
 
-def get_dict_for_dbms(dbms: List[create_ontology.DBMS]) -> DBMSDictType:
+def get_dict_for_dbms(dbms) -> DBMSDictType:
     characteristics_descriptions = [
         characteristic.comment[0] if characteristic.comment else '' 
         for characteristic in dbms.implements
@@ -37,8 +35,10 @@ def get_dbms(requirements: Iterable[str], dbms_count: int = 3) -> List[DBMSDictT
     ontology.load()
 
     onto_requirements = [ontology.search_one(iri=f'*{requirement}') for requirement in requirements]
+
+    dbms_class = ontology.search_one(iri='*DBMS')
     
-    all_dbms = ontology.search(is_a=create_ontology.DBMS)[1:]
+    all_dbms = ontology.search(is_a=dbms_class)[1:]
     sorted_dbms = sorted(
         all_dbms, 
         reverse=True, 
