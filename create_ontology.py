@@ -448,5 +448,3 @@ access_differentiation.ensures_feasibility.append(high_access_differentiation)
 
 with ontology:
     sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
-    
-ontology.save()
