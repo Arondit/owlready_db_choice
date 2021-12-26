@@ -14,15 +14,6 @@ from owlready2.reasoning import sync_reasoner_pellet
 
 current_directory = getcwd()
 
-
-try:
-    remove(f'{current_directory}/db_choice.owl')
-except FileNotFoundError:
-    pass
-with open(f'{current_directory}/db_choice.owl', "w"):
-    pass
-
-
 onto_path.append(current_directory)
 ontology = get_ontology(f'{current_directory}/db_choice.owl')
 ontology.load()
@@ -445,6 +436,3 @@ partial_tolerance.ensures_feasibility.append(geo_independency)
 partial_tolerance.ensures_feasibility.append(store_big_data)
 partial_tolerance.ensures_feasibility.append(high_access_differentiation)
 access_differentiation.ensures_feasibility.append(high_access_differentiation)
-
-with ontology:
-    sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
