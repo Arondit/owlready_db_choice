@@ -1,0 +1,526 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="/home/vlad/projects/fastapi_try/db_choice.owl"
+         xmlns="/home/vlad/projects/fastapi_try/db_choice.owl#"
+         xmlns:swrl="http://www.w3.org/2003/11/swrl#">
+
+<owl:Ontology rdf:about="/home/vlad/projects/fastapi_try/db_choice.owl"/>
+
+<owl:ObjectProperty rdf:about="#implements">
+  <rdfs:domain rdf:resource="#DBMS"/>
+  <rdfs:range rdf:resource="#Characteristic"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#ensures_feasibility">
+  <rdfs:domain rdf:resource="#Characteristic"/>
+  <rdfs:range rdf:resource="#Requirement"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#satisfies">
+  <rdfs:domain rdf:resource="#DBMS"/>
+  <rdfs:range rdf:resource="#Requirement"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#defines">
+  <rdfs:domain rdf:resource="#UseCase"/>
+  <rdfs:range rdf:resource="#Requirement"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#is_suitable_for">
+  <rdfs:domain rdf:resource="#DBMS"/>
+  <rdfs:range rdf:resource="#UseCase"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#refers_to">
+  <rdfs:domain rdf:resource="#DBMS"/>
+  <rdfs:range rdf:resource="#DBMSType"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#needs">
+  <rdfs:domain rdf:resource="#UseCase"/>
+  <rdfs:range rdf:resource="#DBMSType"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#popularity">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#DBMS"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:Class rdf:about="#Characteristic">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Requirement">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DBMS">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DBMSType">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#UseCase">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<swrl:Imp rdf:about="#does_dbms_satisfy_requirement">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#DBMS"/>
+          <swrl:argument1 rdf:resource="urn:swrl#d"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:ClassAtom>
+              <swrl:classPredicate rdf:resource="#Characteristic"/>
+              <swrl:argument1 rdf:resource="urn:swrl#c"/>
+            </swrl:ClassAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:ClassAtom>
+                  <swrl:classPredicate rdf:resource="#Requirement"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                </swrl:ClassAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:IndividualPropertyAtom>
+                      <swrl:propertyPredicate rdf:resource="#ensures_feasibility"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                      <swrl:argument2 rdf:resource="urn:swrl#r"/>
+                    </swrl:IndividualPropertyAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:IndividualPropertyAtom>
+                          <swrl:propertyPredicate rdf:resource="#implements"/>
+                          <swrl:argument1 rdf:resource="urn:swrl#d"/>
+                          <swrl:argument2 rdf:resource="urn:swrl#c"/>
+                        </swrl:IndividualPropertyAtom>
+                      </rdf:first>
+                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:IndividualPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="#satisfies"/>
+          <swrl:argument1 rdf:resource="urn:swrl#d"/>
+          <swrl:argument2 rdf:resource="urn:swrl#r"/>
+        </swrl:IndividualPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Variable rdf:about="urn:swrl#d"/>
+
+<swrl:Variable rdf:about="urn:swrl#c"/>
+
+<swrl:Variable rdf:about="urn:swrl#r"/>
+
+<DBMS rdf:about="#PostgresQL">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#provide_acid"/>
+  <implements rdf:resource="#concurrency"/>
+  <implements rdf:resource="#open_source"/>
+  <implements rdf:resource="#immediate_consistency"/>
+  <implements rdf:resource="#guarantees_safety"/>
+  <implements rdf:resource="#full_text_search"/>
+  <implements rdf:resource="#access_differentiation"/>
+  <implements rdf:resource="#works_as_service"/>
+  <satisfies rdf:resource="#must_be_free"/>
+  <satisfies rdf:resource="#high_access_differentiation"/>
+  <satisfies rdf:resource="#data_must_always_be_correct"/>
+  <satisfies rdf:resource="#cant_lose_data"/>
+  <satisfies rdf:resource="#no_needs_server"/>
+  <satisfies rdf:resource="#fast_response"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Одна из самых популярных и проверенных временем Open Source реляционная база данных PostgreSQL</rdfs:comment>
+  <popularity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">608</popularity>
+</DBMS>
+
+<DBMS rdf:about="#Oracle">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#provide_acid"/>
+  <implements rdf:resource="#concurrency"/>
+  <implements rdf:resource="#in_memory"/>
+  <implements rdf:resource="#immediate_consistency"/>
+  <implements rdf:resource="#guarantees_safety"/>
+  <implements rdf:resource="#full_text_search"/>
+  <implements rdf:resource="#access_differentiation"/>
+  <satisfies rdf:resource="#high_access_differentiation"/>
+  <satisfies rdf:resource="#data_must_always_be_correct"/>
+  <satisfies rdf:resource="#cant_lose_data"/>
+  <satisfies rdf:resource="#fast_response"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Самая популярная реляционная и мульти-модельная база данных. Распространяется на платной основе.</rdfs:comment>
+  <popularity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1281</popularity>
+</DBMS>
+
+<DBMS rdf:about="#SQLite">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#provide_acid"/>
+  <implements rdf:resource="#concurrency"/>
+  <implements rdf:resource="#open_source"/>
+  <implements rdf:resource="#immediate_consistency"/>
+  <implements rdf:resource="#in_memory"/>
+  <implements rdf:resource="#guarantees_safety"/>
+  <implements rdf:resource="#easy_settings"/>
+  <satisfies rdf:resource="#no_needs_server"/>
+  <satisfies rdf:resource="#must_be_free"/>
+  <satisfies rdf:resource="#data_must_always_be_correct"/>
+  <satisfies rdf:resource="#cant_lose_data"/>
+  <satisfies rdf:resource="#works_from_box"/>
+  <satisfies rdf:resource="#fast_response"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Самая простая в настройке реляционная база данных SQLite. Для работы не требуется даже сервер.</rdfs:comment>
+  <popularity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">128</popularity>
+</DBMS>
+
+<DBMS rdf:about="#Redis">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#concurrency"/>
+  <implements rdf:resource="#open_source"/>
+  <implements rdf:resource="#partial_tolerance"/>
+  <implements rdf:resource="#in_memory"/>
+  <implements rdf:resource="#fast_read"/>
+  <implements rdf:resource="#fast_write"/>
+  <implements rdf:resource="#works_as_service"/>
+  <satisfies rdf:resource="#store_big_data"/>
+  <satisfies rdf:resource="#must_be_free"/>
+  <satisfies rdf:resource="#high_access_differentiation"/>
+  <satisfies rdf:resource="#analyze_big_data"/>
+  <satisfies rdf:resource="#no_needs_server"/>
+  <satisfies rdf:resource="#analyze_huge_data"/>
+  <satisfies rdf:resource="#fast_response"/>
+  <satisfies rdf:resource="#geo_independency"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Популярная платформа с хранением данных в памяти. Используется для хранения кэша, обмена сообщениями. Может быть расположена как на своем сервере, так и на облачном.</rdfs:comment>
+  <popularity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">173</popularity>
+</DBMS>
+
+<DBMS rdf:about="#MongoDB">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#provides_map_reduce"/>
+  <implements rdf:resource="#provide_acid"/>
+  <implements rdf:resource="#concurrency"/>
+  <implements rdf:resource="#open_source"/>
+  <implements rdf:resource="#partial_tolerance"/>
+  <implements rdf:resource="#in_memory"/>
+  <implements rdf:resource="#access_differentiation"/>
+  <implements rdf:resource="#works_as_service"/>
+  <satisfies rdf:resource="#must_be_free"/>
+  <satisfies rdf:resource="#store_big_data"/>
+  <satisfies rdf:resource="#high_access_differentiation"/>
+  <satisfies rdf:resource="#data_must_always_be_correct"/>
+  <satisfies rdf:resource="#fast_response"/>
+  <satisfies rdf:resource="#analyze_huge_data"/>
+  <satisfies rdf:resource="#no_needs_server"/>
+  <satisfies rdf:resource="#geo_independency"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Самая популярная документо-ориентированная база данных. Может быть расположена как на своем сервере, так и на облачном.</rdfs:comment>
+  <popularity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">484</popularity>
+</DBMS>
+
+<DBMS rdf:about="#Cassandra">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#provides_map_reduce"/>
+  <implements rdf:resource="#concurrency"/>
+  <implements rdf:resource="#open_source"/>
+  <implements rdf:resource="#partial_tolerance"/>
+  <implements rdf:resource="#fast_read"/>
+  <implements rdf:resource="#fast_write"/>
+  <implements rdf:resource="#works_as_service"/>
+  <satisfies rdf:resource="#store_big_data"/>
+  <satisfies rdf:resource="#must_be_free"/>
+  <satisfies rdf:resource="#high_access_differentiation"/>
+  <satisfies rdf:resource="#analyze_big_data"/>
+  <satisfies rdf:resource="#fast_response"/>
+  <satisfies rdf:resource="#analyze_huge_data"/>
+  <satisfies rdf:resource="#no_needs_server"/>
+  <satisfies rdf:resource="#geo_independency"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Широко-столбцовое хранилище, основанное на идеях BigTable и DynamoDB</rdfs:comment>
+  <popularity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">119</popularity>
+</DBMS>
+
+<DBMS rdf:about="#Hive">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#provides_map_reduce"/>
+  <implements rdf:resource="#concurrency"/>
+  <implements rdf:resource="#open_source"/>
+  <implements rdf:resource="#partial_tolerance"/>
+  <implements rdf:resource="#access_differentiation"/>
+  <satisfies rdf:resource="#must_be_free"/>
+  <satisfies rdf:resource="#store_big_data"/>
+  <satisfies rdf:resource="#high_access_differentiation"/>
+  <satisfies rdf:resource="#analyze_huge_data"/>
+  <satisfies rdf:resource="#fast_response"/>
+  <satisfies rdf:resource="#geo_independency"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Распределенное хранилище данных на основе Hadoop</rdfs:comment>
+  <popularity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">81</popularity>
+</DBMS>
+
+<DBMS rdf:about="#Neo4j">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#provide_acid"/>
+  <implements rdf:resource="#concurrency"/>
+  <implements rdf:resource="#open_source"/>
+  <implements rdf:resource="#access_differentiation"/>
+  <implements rdf:resource="#works_as_service"/>
+  <satisfies rdf:resource="#must_be_free"/>
+  <satisfies rdf:resource="#high_access_differentiation"/>
+  <satisfies rdf:resource="#data_must_always_be_correct"/>
+  <satisfies rdf:resource="#fast_response"/>
+  <satisfies rdf:resource="#no_needs_server"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Самая популярная графовая база данных</rdfs:comment>
+  <popularity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">58</popularity>
+</DBMS>
+
+<DBMS rdf:about="#ClickHouse">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#concurrency"/>
+  <implements rdf:resource="#open_source"/>
+  <implements rdf:resource="#immediate_consistency"/>
+  <implements rdf:resource="#in_memory"/>
+  <implements rdf:resource="#fast_read"/>
+  <implements rdf:resource="#access_differentiation"/>
+  <satisfies rdf:resource="#must_be_free"/>
+  <satisfies rdf:resource="#data_must_always_be_correct"/>
+  <satisfies rdf:resource="#high_access_differentiation"/>
+  <satisfies rdf:resource="#analyze_big_data"/>
+  <satisfies rdf:resource="#analyze_huge_data"/>
+  <satisfies rdf:resource="#fast_response"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Столбцово-ориентированная СУБД, созданная Яндексом. Хорошо подходит для аналитики.</rdfs:comment>
+  <popularity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12</popularity>
+</DBMS>
+
+<DBMS rdf:about="#NebulaGraph">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#provide_acid"/>
+  <implements rdf:resource="#concurrency"/>
+  <implements rdf:resource="#open_source"/>
+  <implements rdf:resource="#partial_tolerance"/>
+  <implements rdf:resource="#immediate_consistency"/>
+  <implements rdf:resource="#in_memory"/>
+  <implements rdf:resource="#fast_read"/>
+  <implements rdf:resource="#access_differentiation"/>
+  <satisfies rdf:resource="#must_be_free"/>
+  <satisfies rdf:resource="#store_big_data"/>
+  <satisfies rdf:resource="#data_must_always_be_correct"/>
+  <satisfies rdf:resource="#high_access_differentiation"/>
+  <satisfies rdf:resource="#analyze_big_data"/>
+  <satisfies rdf:resource="#fast_response"/>
+  <satisfies rdf:resource="#analyze_huge_data"/>
+  <satisfies rdf:resource="#geo_independency"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Распределенная масштабированная графовая база данных с высокой производительностью.</rdfs:comment>
+  <popularity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</popularity>
+</DBMS>
+
+<DBMS rdf:about="#ElasticSearch">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#concurrency"/>
+  <implements rdf:resource="#open_source"/>
+  <implements rdf:resource="#partial_tolerance"/>
+  <implements rdf:resource="#full_text_search"/>
+  <satisfies rdf:resource="#store_big_data"/>
+  <satisfies rdf:resource="#must_be_free"/>
+  <satisfies rdf:resource="#high_access_differentiation"/>
+  <satisfies rdf:resource="#analyze_huge_data"/>
+  <satisfies rdf:resource="#fast_response"/>
+  <satisfies rdf:resource="#geo_independency"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Самая популярная платформа для работы с полнотекстовым поиском</rdfs:comment>
+  <popularity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">157</popularity>
+</DBMS>
+
+<DBMS rdf:about="#Memcached">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#concurrency"/>
+  <implements rdf:resource="#open_source"/>
+  <implements rdf:resource="#in_memory"/>
+  <implements rdf:resource="#fast_read"/>
+  <implements rdf:resource="#fast_write"/>
+  <implements rdf:resource="#access_differentiation"/>
+  <implements rdf:resource="#easy_settings"/>
+  <satisfies rdf:resource="#must_be_free"/>
+  <satisfies rdf:resource="#high_access_differentiation"/>
+  <satisfies rdf:resource="#analyze_big_data"/>
+  <satisfies rdf:resource="#works_from_box"/>
+  <satisfies rdf:resource="#analyze_huge_data"/>
+  <satisfies rdf:resource="#fast_response"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Хранилище ключ-значение для кэша</rdfs:comment>
+  <popularity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">26</popularity>
+</DBMS>
+
+<Characteristic rdf:about="#provide_acid">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ensures_feasibility rdf:resource="#data_must_always_be_correct"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Поддерживает требования к транзакционной системе</rdfs:comment>
+</Characteristic>
+
+<Characteristic rdf:about="#immediate_consistency">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ensures_feasibility rdf:resource="#data_must_always_be_correct"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Данные полностью согласованы в любой момент времени</rdfs:comment>
+</Characteristic>
+
+<Characteristic rdf:about="#provides_map_reduce">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ensures_feasibility rdf:resource="#analyze_huge_data"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Поддерживает популярную парадигму параллельной обработки огромных данных (петабайты)</rdfs:comment>
+</Characteristic>
+
+<Characteristic rdf:about="#concurrency">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ensures_feasibility rdf:resource="#fast_response"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Поддерживает конкурентный доступ (параллельность/асинхронность)</rdfs:comment>
+</Characteristic>
+
+<Characteristic rdf:about="#open_source">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ensures_feasibility rdf:resource="#must_be_free"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Свободная лицензия</rdfs:comment>
+</Characteristic>
+
+<Characteristic rdf:about="#partial_tolerance">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ensures_feasibility rdf:resource="#analyze_huge_data"/>
+  <ensures_feasibility rdf:resource="#geo_independency"/>
+  <ensures_feasibility rdf:resource="#store_big_data"/>
+  <ensures_feasibility rdf:resource="#high_access_differentiation"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Поддерживает разделение в смысле Partial Tolerance из т.н теоремы CAP</rdfs:comment>
+</Characteristic>
+
+<Characteristic rdf:about="#in_memory">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ensures_feasibility rdf:resource="#fast_response"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Возможность хранить данные в памяти, не сохраняя их на диск</rdfs:comment>
+</Characteristic>
+
+<Characteristic rdf:about="#fast_read">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ensures_feasibility rdf:resource="#fast_response"/>
+  <ensures_feasibility rdf:resource="#analyze_big_data"/>
+  <ensures_feasibility rdf:resource="#analyze_huge_data"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Очень быстрое чтение огромных данных: свойство СУБД, которые нужны в основном для аналитики</rdfs:comment>
+</Characteristic>
+
+<Characteristic rdf:about="#fast_write">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ensures_feasibility rdf:resource="#fast_response"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Быстрая запись данных в базу (в память или на диск)</rdfs:comment>
+</Characteristic>
+
+<Characteristic rdf:about="#guarantees_safety">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ensures_feasibility rdf:resource="#cant_lose_data"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Гарантирует, что она никогда не потеряет полученные данные</rdfs:comment>
+</Characteristic>
+
+<Characteristic rdf:about="#access_differentiation">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ensures_feasibility rdf:resource="#high_access_differentiation"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Поддерживает ограничение доступов, например, через мульти-тенантность или через концепцию пользователей</rdfs:comment>
+</Characteristic>
+
+<Characteristic rdf:about="#full_text_search">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Поддерживает полнотекстовый поиск</rdfs:comment>
+</Characteristic>
+
+<Characteristic rdf:about="#easy_settings">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ensures_feasibility rdf:resource="#works_from_box"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Не требует опыта и специальных знаний для настройки</rdfs:comment>
+</Characteristic>
+
+<Characteristic rdf:about="#works_as_service">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <ensures_feasibility rdf:resource="#no_needs_server"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">База данных как сервис. СУБД поддерживает работу в облачном сервисе.</rdfs:comment>
+</Characteristic>
+
+<Requirement rdf:about="#data_must_always_be_correct">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Данные всегда должны быть корректны: даже временная несогласованность данных критична</rdfs:comment>
+</Requirement>
+
+<Requirement rdf:about="#cant_lose_data">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Нельзя терять данные: потеря данных может быть критична. Нужно уточнять, так как бывают сценарии использования базы данных, в которых такого требования нет. Например, кэш.</rdfs:comment>
+</Requirement>
+
+<Requirement rdf:about="#high_access_differentiation">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Повышенные требования к разграничению доступов: в некоторых системах доставка данных не тому пользователю критична,и им нужно разделение доступов, чтобы такая ситуация стала невозможной даже теоретически.</rdfs:comment>
+</Requirement>
+
+<Requirement rdf:about="#analyze_big_data">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Нужно анализировать огромные данные: требование, которые предъявляют аналитические системы</rdfs:comment>
+</Requirement>
+
+<Requirement rdf:about="#analyze_huge_data">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Нужно анализировать настолько огромные данные, что они не помещаются на один сервер: да, такое вполне возможно</rdfs:comment>
+</Requirement>
+
+<Requirement rdf:about="#fast_response">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Должна отвечать как можно быстрее: скорость отклика является критичной</rdfs:comment>
+</Requirement>
+
+<Requirement rdf:about="#store_big_data">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Нужно хранить огромные данные: речь о данных, которые не помещаются на одном сервере</rdfs:comment>
+</Requirement>
+
+<Requirement rdf:about="#geo_independency">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Должна отвечать одинаково быстро независимо от географии: если пользователи распределены по всему миру, то расположение сервера очень важно. СУБД должна быть в состоянии безболезненно разбиваться на несколько изолированных серверов</rdfs:comment>
+</Requirement>
+
+<Requirement rdf:about="#must_be_free">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Должна быть бесплатной: не всегда возможно использовать платные решения</rdfs:comment>
+</Requirement>
+
+<Requirement rdf:about="#working_with_texts">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Должна быстро работать с текстом: например, в поисковых системах или при анализе текста</rdfs:comment>
+</Requirement>
+
+<Requirement rdf:about="#works_from_box">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Должна нормально работать «из коробки»: важно, когда нет возможности нанять опытного специалиста по базам данных</rdfs:comment>
+</Requirement>
+
+<Requirement rdf:about="#no_needs_server">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">СУБД может работать даже без сервера</rdfs:comment>
+</Requirement>
+
+
+</rdf:RDF>
