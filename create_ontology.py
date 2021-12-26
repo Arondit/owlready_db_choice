@@ -9,8 +9,6 @@ from owlready2 import (
 )
 from os import getcwd, remove
 
-from owlready2.reasoning import sync_reasoner_pellet
-
 
 current_directory = getcwd()
 
