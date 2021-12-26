@@ -36,7 +36,7 @@
     background: #4ad94a;
 }
 main {
-    width: 40%;
+    max-width: 800px;
     display: block;
     margin: 0 auto;
     border: 1px solid black;
