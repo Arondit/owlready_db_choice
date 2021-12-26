@@ -9,8 +9,6 @@ from owlready2 import (
 )
 from os import getcwd, remove
 
-from owlready2.reasoning import sync_reasoner_pellet
-
 
 current_directory = getcwd()
 
@@ -445,9 +443,5 @@ partial_tolerance.ensures_feasibility.append(geo_independency)
 partial_tolerance.ensures_feasibility.append(store_big_data)
 partial_tolerance.ensures_feasibility.append(high_access_differentiation)
 access_differentiation.ensures_feasibility.append(high_access_differentiation)
-
-
-with ontology:
-    sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
 
 ontology.save()
